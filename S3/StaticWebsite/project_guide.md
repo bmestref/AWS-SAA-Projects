@@ -1,7 +1,5 @@
 # How to Create a Static Website Hosted by S3
 
----
-
 1 - First, make sure you are logged in as IAM User, in the US East (N. Virginia) region. <br/>
 2 - Move across the AWS Console to S3, and click on create a new S3 bucket <br/>
 3 - Fill the Bucket Name box with a unique name (the S3 bucket will not be created if there is another one which holds the same name. Make sure it is unique). One can create the bucket within a custom domain by adding at the end if the bucket name the domain identifier. <br/>
@@ -20,9 +18,9 @@ Here, we allow (Effect : Allow) to read any object (Action: [s3:GetObject]) to a
 13 - To test the error.html file, let's try to browse an object which does not exist by adding at the end of the url '/something.png'. Automatically, the error.html file will be loaded and displayed. Files from the bucket can be loaded by typing at the end of the url its filename. Below displayed is the expected output.<br/>
 ![Alt text](pic2.png)
 
----
+
 ## Optional
----
+
 14 - One may need to assign a custom DNS name (custom domain name) to the bucket provided by Route53. For that matter, move to the Route53 console, click on 'Hosted Zones' and we should have a hosted zone that matches with the custom domain name we registered previously. <br/>
 15 - Go inside that and click on 'Create record'. <br/>
 16 - We will be creating a simple routing record so click on 'Simple routing' and then click on 'Next'. <br/>
@@ -32,6 +30,7 @@ Here, we allow (Effect : Allow) to read any object (Action: [s3:GetObject]) to a
 20 - Now, in the 'Enter S3 endpoint' pick our bucket name (if it does not appear then either the region used in this part and the bucket region do not match or you have not used the same name in this part of the record name as the bucket name). Finally, click on 'Define simple record'. <br/>
 21 - Click on 'Create records'. <br/>
 22 - Wait until the Satic Website endpoint is available (it may take some short time). <br/>
----
+
+
 23 - Finally, let's tidy up all the resources created during the demo, so delete the record you created if you hold a custom domain name. <br/>
 24 - Also, move to the S3 console, empty the bucket and finally delete the bucket. <br/>
