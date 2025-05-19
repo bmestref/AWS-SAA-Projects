@@ -11,12 +11,12 @@
 9 -  The Static Website Hosting has been finally enabled (and we can access to the static website by copying into the clipboard and pasting it to the search bar the url displayed at the bottom), so it is time to upload some objects to the bucket. For this matter, click on 'Objects'. As mentioned before, we need to provide the index.html and error.html files, so click on 'Add files' and drop into the box the files attached to the repository. Finally, click on 'Upload'. <br/>
 10 - Furthermore, we may add some content to the website, so click on 'Add folder' and upload the folder named 'img' following the same steps as above. These pictures will be displayed in our static website. <br/>
 11 - If we try to browse our website by copying into the clipboard the url already mentioned (located at the very bottom of the 'Properties' page) and pasting it into the search bar we will come across an Acces Denied Error (403). This comes up as a result of not having the right permissions to access the objects contained within the bucket (remember that S3 Buckets are private by default thus eventhough we enabled the static website hosting feature objects within the bucket are still not accessible from the web browser. We are actually trying to access as an unauthenticated user so we need to hold the right creentials. That can be fixed by attaching a bucket policy which grants public access to any object to any anauthenticated user. So, in the bucket console select the 'Permissions' tab and scroll down to the Policy box, click on 'Edit' and paste there the bucket policy attached in the repository. The bucket policy should be visible as displayed in the picture below.<br/>
-![Alt text](bucket_policy_pic.png)
+![Alt text](bucket_policy_pic.PNG)
 Here, we allow (Effect : Allow) to read any object (Action: [s3:GetObject]) to any user (Principal : *) (authenticated or not) inside the bucket (Resource : arn:aws:s3:::<your_bucket_arn>/ *) (/* grants access to all objects within the bucket, so keep this part when replacing the arn). It is crucial to use the arn of your bucket, which can be found on top of the Bucket Policy box. Go ahead and click on 'Save changes' <br/>
 12 - Finally, browse the static website into the search bar. Automatically the index.html will be loaded except we specify any object to retrieve. Below displayed is the expected output.<br/>
-![Alt text](pic1.png)
+![Alt text](pic1.PNG)
 13 - To test the error.html file, let's try to browse an object which does not exist by adding at the end of the url '/something.png'. Automatically, the error.html file will be loaded and displayed. Files from the bucket can be loaded by typing at the end of the url its filename. Below displayed is the expected output.<br/>
-![Alt text](pic2.png)
+![Alt text](pic2.PNG)
 
 
 ## Optional
