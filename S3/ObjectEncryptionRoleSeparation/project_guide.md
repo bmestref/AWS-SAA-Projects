@@ -36,13 +36,13 @@ This DEMO focusses on the role separation aspect of S3 encryption using KMS. <br
 
 ```
 {
-  "Version" : "2025-05-24",
-  "Statement" : [
+  "Version": "2012-10-17",
+  "Statement": [
     {
-      "Sid" : "VisualEditor0",
-      "Effect" : "Deny",
-      "Action" : "kms:*"
-      "Resource" : "*"
+      "Sid": "DenyEveryone",
+      "Effect": "Deny",
+      "Action": "kms:*",
+      "Resource": "*"
     }
   ]
 }
