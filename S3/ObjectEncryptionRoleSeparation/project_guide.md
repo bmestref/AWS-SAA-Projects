@@ -49,7 +49,7 @@ This DEMO focusses on the role separation aspect of S3 encryption using KMS. <br
 ```
 
 This policy is read as Deny (Effecct: Deny) any Action (Action : kms:"\*") on all Resources (Resource:"\*"), so it blocks the entire KMS for this user. Go ahead and click on 'Review policy' at the bottom of the page, give it a name and finally click on 'Create policy'. That means IAM admin can no longer access KMS. If one tries to access again to the object, is is expected to come across this messahe.<br/>
-![Object Encrypted Denial Response](deny.png) <br/>
+![Object Encrypted Denial Response](deny.PNG) <br/>
 
 12 - In that sense, those objects encrypted using KMS will be no longer accessible from the perspective of the IAM Admin. That does not apply to those objects which where encrypted using S3 Encryption managed service. See that eventhough the object is encrypted and not accessible, we still have the permissions to delete it. To summarize, using KMS encryption keys you enable role separation and full encryption access admin control (key rotation and customization), crucial when restricting access to a certain number of users. <br/>
 
