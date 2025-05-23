@@ -18,5 +18,22 @@ This DEMO focusses on the role separation aspect of S3 encryption using KMS. <br
 12 - Next, we are able to pick between two Encryption key types: S3 managed and KMS managed. The main point of using the first one relies on the fact it is fully managed, but that may be one of its main drawbacks as well: S3 has full control on them, so critical or sensitive keys should not be managed by a third party but instead by the user himself. In the other hand, AWS Key Management Service by KMS provides full control to the user to manage all encryption keys. For now, pick the S3 managed key option (SSE-SE) (low admin overhead at the expense of potential privacy leakage). Scroll down and click on 'Upload'.<br/>
 13 - Follow the same steps for a new object, but this time pick the SSH-KMS managed encryption option. This will allow us to use the KMS key we created before, so on the features panel below select 'Choose from your AWS KMS keys'. In the search bar below, look for the name of the KMS key and use it to encrypt our objecy. Scroll down to the bottom and click on 'Upload'.<br/>
 14 - Once you have done that, you can check you can access and see these objects since we are logged in as the IAM User, the root user which holds the encryption key. <br/>
-13 - Let's play a little bit more with key permissions. This time, we will apply a Deny policy on the IAM user so it can no longer can read these objects.
-12 - 
+13 - Let's play a little bit more with key permissions. This time, we will apply a Deny policy on the IAM user so it can no longer read these objects. For that matter, move to the search bar and move to the IAM console. Once there, click on users, select your IAM admin user, click on 'Add permisions' and next on 'Create inline policy'. A json tab will be shown, containing a by default policy. Remove it and paste the content within the policy json file attached to the repo. It should look like this: <br/>
+```
+{
+  "Version" : "2025-05-24",
+  "Statement" : [
+    {
+      "Sid" : "VisualEditor0",
+      "Effect" : "Deny",
+      "Action" : "kms:*"
+      "Resource" : "*"
+    }
+  ]
+}
+```
+This policy is read as Deny (Effecct: Deny) any Action (Action : kms:"\*") on all Resources (Resource:"\*"), so it blocks the entire KMS for this user. Go ahead and click on 'Review policy' at the bottom of the page, give it a name and finally click on 'Create policy'. That means IAM admin can no longer access KMS. If one tries to access again to the object, is is expected to come across this messahe.<br/>
+[]
+12 - In that sense, those objects encrypted using KMS will be no longer accessible from the perspective of the IAM Admin. That does not apply to those objects which where encrypted using S3 Encryption managed service. See that eventhough the object is encrypted and not accessible, we still have the permissions to delete it. To summarize, using KMS encryption keys you enable role separation and full encryption access admin control (key rotation and customization), crucial when restricting access to a certain number of users. <br/>
+13 - One more thing to cover before finishing up this demo lesson. Move across the S3 console, click on 'Buckets', select the bucket we have been working on trhoughout the lesson and click on 'Edit default encryption'. This feature will enable us to customize and pick an encryption type used by default for each object within the bucket. It is not a restriction: it does not prevent anyone to upload objects to the bucket using a different type of encryption. So in the 'Edit default encryption' panel once again we can pick between using an Amazon S3 managed key or an Amazon KMS managed key. If selecting the latter, pick the custom key option and use the KMS key created at the beggining of the lesson. Click on 'Save changes', so everytime a new object is uploaded it will be encrypted using the KMS key <br/>.
+14 - That is all I wanted to cover in this demo, so empty the bucket and delete both the bucket and all keys (S3 key and KMS key).<br/>
