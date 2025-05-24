@@ -32,7 +32,7 @@ In this Demo lesson we will create 2 S3 buckets, one in N. Virginia and the othe
 
 12 - Now replication is finally enabled between these two buckets, so let's give it a try and upload some objects on the source destination (some can be found attached to this repo). Once you've done that, go back to your destination an wait until the replicated objects appear in your destination (do not alarm if they are not shown inmediately, it may take some minutes based on your internet connection and object size). If done correctly, the static website should look like this (copy into your clipboard the url path displayed at the bottom of the page after click on 'Properties' on the bucket panel).<br/>
 
-!['The best plane in the world'][plane.PNG]
+![The best plane in the world][plane.PNG]
 <br/>
 
 13 - At this point that is it all we wanted to cover in this lesson, so tidy up all resources created along the lesson so empty and delete both the source and destination buckets. Remember that to enable replication across buckets we had to create an IAM role so move to the IAM console, click on 'Roles', locate the role we created, select it (make sure you select the one that has the name of source bucket) and delete that role. <br/>
