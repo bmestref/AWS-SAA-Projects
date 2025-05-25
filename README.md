@@ -7,3 +7,5 @@ Before getting your hands on these projects, make sure you have set a Cost Manag
 2 - Next, provide a name for the budget below, and specify the recipients of the budget alarms in the 'Email recipients' box. <br/>
 
 3 - Finish the budget creation by clicking on 'Create budget' at the end of the pabe. <br/>
+
+4 - In case some extra charges have been added to your monthly bill and do cannot find where do they come from, do not panic! Within the Billing and Cost Management service, click on 'Cost explorer' in the menu on the left under 'Cost and Usage Analysis'. Here you will find some reports and analytics of your AWS services usage and track those which are potentially increasing your bill. <br/>
