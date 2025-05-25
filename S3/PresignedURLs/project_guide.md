@@ -5,7 +5,7 @@ In this demo lesson you will create a bucket, upload an object and generate a pr
 1 - First, make sure you are logged in the AWS general management account in the N. Virginia region (us-east-1). Then, go ahead and move to the S3 console. Click on 'Create bucket', give it a name and leave the 'Block public access' option checked (keep it private). Also for this demo we will not use any form of encryption so go ahead and click on 'Create bucket'. <br/>
 
 2 - Once you've done that, go to the bucket and upload the image attached to the repo. Next, click on this object and click on 'Open' on the top right of the screen (this will open the object in a new tab). It is relevant to point out some important points on how this object has been opened: if you takea moment to review the url that has been used to open this object, you will notice that a series of pieces of information has been specified in your url, including a security token, so essentially a form of authentication has been provided on the url which allows you to access this object. Let's contrast it with the 'Object URL' which can be found on the bottom right of the previous object panel. See that it does not provide any piece of authentication  for this object. Copy that into your clipboard and paste it into your browser. You will come across an access denied message (403) looking like this <br>
-[Error message acess denied](deny_error_message.PNG)
+![Error message acess denied](deny_error_message.PNG)
 
 which makes sense since we are trying to access this object as an unauthenticated identity, just like any internet user. The bucket should be made public in order to provide free access to the bucket object to any unauthenticated user. These are the main differences between both methods: one is providing identity authentication and the other is not. <br/>
 
@@ -20,10 +20,10 @@ aws s3 presign s3://mybucket/img.png --expires-in 180
 ```
 Below an example is shown: <br/>
 
-[Example](example.PNG)
+![Example](example.PNG)
 
 Once you've done that, click on enter. Automatically an URL will be generated, copy that into your clipboard and paste it on your browser, granting time-limited access to the object. You can check yourself that after exceeding that amount of time an error message should pop up like this, stating that the url is no longer valid: <br/>
-[Error message time exceeded out](time_exceeded_error_message.PNG)
+![Error message time exceeded out](time_exceeded_error_message.PNG)
 <br/>
 
 4 - We will work a little bit more with presigned URLs, so this time create a new one but fix the amount of time the url will be valid to a large number such as 3600 (1 hour). That will be enough time to test some procedures on this time-limited new URL. Once you've done that, move to IAM service and open it on a new tab. Select 'Users' in the menu on the left, select the 'iamadminuser' or the admin user of your AWS account, move to 'Permissions' and in the dropdown click on 'Create policy', next click on 'JSON' and paste there all the content of the json file attached to the repo. This policy contains an explicit deny which denies to any user any acces to S3. Is read as Deny (Effect:Deny) to Any User any Action within S3 (Action: s3:*) to Any Object within s3 (Resource:2):<br/>
