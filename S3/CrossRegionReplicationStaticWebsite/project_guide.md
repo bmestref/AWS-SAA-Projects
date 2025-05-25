@@ -36,9 +36,8 @@ In this Demo lesson we will create 2 S3 buckets, one in N. Virginia and the othe
 <br/>
 
 13 - At this point that is it all we wanted to cover in this lesson, so tidy up all resources created along the lesson so empty and delete both the source and destination buckets. Remember that to enable replication across buckets we had to create an IAM role so move to the IAM console, click on 'Roles', locate the role we created, select it (make sure you select the one that has the name of source bucket) and delete that role. <br/>
-```diff
-WARNING!
-```
+
+\color{red}WARNING!
 It cannot be stressed enough that client-managed KMS keys need to be removed since they do not fall into the AWS free tier. Since removing a KMS key is a destructive and potentially dangerous procedure (after a KMS key is deleted, you can no longer decrypt the data that was encrypted under that KMS key, which means that data becomes unrecoverable), AWS requires to set waiting period of 7-30 days (by default it is 30 days). During this waiting period we will not be charged any cost of usage of the key, but if the deletion order is withdrawn then we will be charged the cost of usage of all this period until the deletion was canceled. <br/>
 
 <br/>
