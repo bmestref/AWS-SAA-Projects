@@ -13,6 +13,16 @@ Amazon Simple Storage Service (S3) Multi-Region Access Points provide a global e
 
 5 - As mentioned before we needed to enable replication between buckets so scroll down and in the 'Replication rules' panel click on 'Create replication rules'. Two templates will be made available, and the choise of one or another depend on the type of configuration of our cross-region architecture. Since the set the failover configuration to 'Active' on both buckets, the first template will be fine (we want all the buckets to be the same, so pick the 'Replicate objects among all specified buckets' option). <br/>
 
-6 - 
+6 - Scroll down a little bit and select both buckets were the template will be applied to. <br/>
+
+7 - In the replication panel make sure the 'Enabled' replication setting is picked. <br/>
+
+8 - Next, in the 'Scope' section pick 'Apply to all objects in the bucket' in order to apply the same replication rule to all buckets within this architecture and not filter out by object type. <br/>
+
+9 - Because of the template choice done before, we cannot customize the Encryption configuration so leave it and scroll down and click on 'Create replication rules' (additional features are displayed at the end of the page such as 'Delete marker replication', 'Replication metrics and notifications', etc. but we will leave it as defaulT). <br/>
+
+10 - Once you've done that, click on 'Close' and you should be able to see a connection between both AWS regoions in the Replication/Failover world map. Let's test the Multiregion-replication feature, so move to a close region from the perspective of the AWS Sydney region (pick, for instance, the Tokyo region). From there we will interact with the infrastructure. So open the CloudShell in the Tokio Region (closest to Sydney region). <br/>
+
+11 - 
 
 
