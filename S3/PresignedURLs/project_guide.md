@@ -18,6 +18,10 @@ In our case, this S3 URI should look like `s3://<your_bucket_name>/<your_pic_nam
 ```
 aws s3 presign s3://mybucket/img.png --expires-in 180
 ```
+Below an example is shown: <br/>
+
+[Example](example.PNG)
+
 Once you've done that, click on enter. Automatically an URL will be generated, copy that into your clipboard and paste it on your browser, granting time-limited access to the object. You can check yourself that after exceeding that amount of time an error message should pop up like this, stating that the url is no longer valid: <br/>
 [Error message time exceeded out](time_exceeded_error_message.PNG)
 <br/>
