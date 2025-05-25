@@ -14,7 +14,7 @@ which makes sense since we are trying to access this object as an unauthenticate
 ```
 aws s3 presign <add_here_the_S3_URI_of_the_object> --expires-in <number_of_seconds_until_expiration>
 ```
-In our case, this S3 URI should look like s3://<your_bucket_name>/<your_pic_name> (can be found on the object panel). For instance, if we aim to create a presigned URL in S3 to grant time limited access to an object called 'img.png' in the 'mybucket' bucket for 180 seconds, the prompt should look like this: <br/>
+In our case, this S3 URI should look like `s3://<your_bucket_name>/<your_pic_name>` (can be found on the object panel). For instance, if we aim to create a presigned URL in S3 to grant time limited access to an object called 'img.png' in the 'mybucket' bucket for 180 seconds, the prompt should look like this: <br/>
 ```
 aws s3 presign s3://mybucket/img.png --expires-in 180
 ```
