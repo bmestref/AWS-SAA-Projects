@@ -1,1 +1,27 @@
+# Creation and Configuration of a Custom VPC end to end
 
+In this lesson we will step through the creation and configuration of a custom multi-tier VPC. The VPC will be populated with a number of subnets which will have access to the public internet via a VPC router and next an Internet Gateway located into the AWS Public Zone.
+This custom architecture is important because it reflects a best-practice design for secure, scalable, and high-performing applications in the cloud.<br/>
+
+1 - As always, make sure you are logged in as the admin user in the N.Virginia region (us-east-1). <br/>
+
+2 - Next, move across the VPC console, select 'Your VPCs' and click on 'Create VPC'. From here, we can create the VPC only or create it along other resources. For now, pick the 'VPC only' option under 'Resources to create' (during the next lessons we will be implementing the rest of components within VPC). Next, give it a name for the VPC, and pick the 'IPv4 CIDR manual input' in the options box below so we can pick manually the IP range of the subnets within our VPC. In the 'IPv4 CIDR' box, give a reasonable range such as '10.16.0.0/16' (remember that IPv6 supports both private and public IP addresses while by default IPv4 only supports private). <br/>
+
+3 - Pick 'Amazon-provided IPv6 CDIR block' under 'IPv6 CIDR block' in order to support public IP addresses as well, and under 'Tenancy' select 'Default' (instances run on shared hardware with other AWS customers, choose 'Dedicated' if they must be run on hardware physically isolated at the host level from instances that belong to other AWS accounts). Once you've done that, leave everything else as default and click on 'Create VPC ' at the bottom of the page. <br/>
+
+4 - Every VPC comes with a unique identifier called VPC ID which can be found under 'Details' on the VPC panel of the one we have just created. Now, let's configure the DNS settings (DNS settings in custom VPCs are crucial because they control how resources inside the VPC resolve domain names), so click on 'Actions' and then on 'Edit VPC settings'. Next, make sure under 'DNS settings' both DNS resolution and DNS hostnames are checked. Once you've done that, click on 'Save'. <br/>
+
+5 - Next, we will step through the creation of 4 subnets in each AZ: the Web subnet, the App subnet, the Database subnet and the Reserved subnet. We will add all for 4 to 3 different AZs (AZ A, B and C). Attached to this repo you will find a document specifying the configuration of each subnet. It should look like this: <br/>
+
+![Pic of configuration of subnet](config.PNG)
+
+The name of each subnet is stated at the beggining of each line, followed by its IPv4 CIDR range, next the AZ it belongs to and at the end of the line the unique identifier of the IPv6 CIDR range (this last value will make sense at the subnet configuration step). Once opened that, move across the VPC console, click on 'Subnets' on the menu on the left and next no 'Create subnet' at the top right of the page. AWS allows you to create multiple times at a time so we will just need to repeat the same process 3 times (for each AZ available in the VPC). Let's get started with AZ A and under 'VPC ID' select the VPC ID of the VPC we just created before in the dropdown menu. Once you've done that, we will start with 'Subnet 1 of 1', so move back to the config.txt document attached to the repo (we will start with the reserved subnet), so copy into the clipboard the subnet name and paste it on the 'Subnet name' box. Next, in the 'Availability Zone' box pick the us-east-1a AZ (this will be our AZ A). Next, set 'IPv4 CIDR block' to 'Manual' and paste there the IP range copied from the subnet configuration file. In the panel below, pick the IPv6 VPC CIDR block of your VPC and in 'IPv6 subnet CIDR block' paste the same CIDR range above. With the arrows below, you can modify the range of the subnet, so click two times on the down arrow (this is, your subnet will be /64 sized while your VPC will be /56 (so the subnet fits inside the VPC)). Also, in order to provide a unique IPv6 range for each subnet, change the last two digits of the number before the /<number> at the end of the address and paste there the two digits found at the end of the subnet line in the configuration file (this will make each subnet IPv6 range unique). Once you've done that, scroll down to the bottom and click on 'Add new subnet'. Repeat the same steps for the rest of subnets for AZ A. Once all 4 subnets have been created in AZ A, scroll down to the bottom and click on 'Create subnet'.<br/>
+
+6 - Follow the same steps for the other 2 AZs, where this time set on 'Availability Zone' the us-east-1b AZ for AZ B and us-east-1c for AZ C. <br/>
+
+7 - All 3 AZs have been populated with 4 subnets each one. Now there is one final thing that we need to do to all of these subnets: each of these subnets is alocated with an IPv6 range. However, it is not set t auto alocate IPv6 addresses to anything created within these subnets. To fix that, select the subnet, click on 'Actions' and then on 'Edit subnet settings'. Once you've done that, check the box 'Enable auto-assign IPv6 addresses'. Scroll down to the bottom and click on 'Save'. Repeat this step for all subnets within the VPC. In production world, all these manual steps should be automated. So far we end up with this architecture sketched below. <br/>
+
+![VPC state 1](vpc_state1.PNG)
+
+
+8 - 
