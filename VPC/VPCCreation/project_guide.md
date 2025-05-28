@@ -38,3 +38,30 @@ This ensures that any unknown traffic associated with this route table will be r
 
 10 - Before launching any resources, we need to ensure that everything created in subnets sn-web-A, sn-web-B, and sn-web-C can be assigned a public IPv4 address. To do that, go to 'Subnets' in the left menu, locate and select sn-web-A, sn-web-B, and sn-web-C, then click on 'Actions' > 'Edit subnet settings'. This time, under 'Auto-assign IP settings', check the box labeled 'Enable auto-assign public IPv4 address'. Click 'Save'. This ensures that every resource created within these subnets will be allocated a public IPv4 address.<br/>
 
+11 - Now it's time to test this configuration by deploying and EC2 instance within the sn-web-A subnet, so click on 'Services' and move across the EC2 console. Once we are on the EC2 console click on 'Launch Instance'. In the name box give a name for the instance, scroll down and pick 'Amazon Linux' under 'Application and OS Images'. On the dropdown below go ahead and select the latest version of Amazon Linux. Assuming everything is all good, specify the 'Instance type' (make sure you're in the free tier so no costs are charged to your bill). Scroll down and under 'Key pair' click on 'Create key pair' if if does not exist yet. Enter a name on the name box, select 'RSA' under 'Key pair type', select '.pem' on the 'Private key file format' panel and then click on 'Create key pair'. This will download the key pair to your local machine. Now that it has been created, select it on the Key pair dropdown, scroll down and on 'Network settings' click on 'Edit'. Next, pick the VPC as well as the subnet (sn-web-A) the instance will be deployed within and make sure both 'Auto-assign public IP' and 'Auto-assign IPv6 IP' are enabled. Also, we will create a new security group for the instance, so in the 'Firewall' panel select 'Create security group', next enter a name for the security group, leave the rest as default and click on 'Launch instance'. <br/>
+
+12 - Next cick on instances at the top left of the screen and wait until the instance has 2/2 status check (ready to go). We will connect to this instance using a local SSH client so right click on the instance and next on 'Connect'. See that there is a number of different methods to access to the instance, but most of the cases we will connect using the 'EC2 isntance connect' method since it is faster (the instance is opened on a web console) and does not require an SSH client connection. However, this time pick the 'SSH client' connection and a list of instructions will be displayed on how to proceed with the connection. The prompt run on our terminal to connect to the instance is shown below: <br/>
+
+```
+ssh -i "<your key pair>" <your ec2 user>@<public DNS of the instance>
+```
+An example would look like this: <br/>
+
+```
+ssh -i "A4L.pem" ec2-user@ec2-34-203-233-236.compute-1.amazon.com
+```
+
+So copy into your clipboard this prompt, fulfill it with your instance parameters, move to the directory the downloaded key pair is stored, paste into the therminal de prompt above and press enter. That should connect us to the EC2 instance. Below you can see how should be done in case your key pair is stored within the 'Downloads' folder: <br/>
+
+![instance connect using ssh client](instance_connectssh.PNG)
+
+See that the terminal returns an error as the terminal does not hold the permissions to access the key pair. Grant the appropriate permissions by running the following command to restrict access to the private key file: <br/>
+
+```
+chmod 400 <your key pair>
+```
+Rerun the prompt displayed above earlier and access to the instance should be granted. Regarding alternative methods to access the instance, it is worthwhile to highlight the 'Session Manager' method, which is particularly useful in scenarios where the instance does not have a public IPv4 address. <br/>
+
+13 - We don’t need to manually go through all these steps because CloudFormation allows us to deploy the entire architecture using a YAML template file in most of the cases. AWS used to provide the CloudFormer service which provided the capability of translating your AWS infrastructure to a yaml file ready to be deployed, it has been no longer maintained. Nowadays Former2 surges as the replacement of this tool. Attached to the repo you will find a yaml file containing the AWS VPC built so far in this repo so it can be inmediately deployed using CloudFormation. <br/>
+
+14 - 
