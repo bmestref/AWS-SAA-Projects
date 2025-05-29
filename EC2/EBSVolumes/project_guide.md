@@ -18,7 +18,9 @@ below we will run a series of prompts to interact with the volume. Sart by check
 lsblk
 ```
 The output should look like this in the terminal: <br/>
+
 ![lsblk](lsblk.PNG)
+
 You will find two blocks: the first (xvda) stands for the instance running system (which is 8 GiB in size) while the latter (xvdf) stands for the EBS volume we attached earlier (with 10 GiB). Check if any file system is alocated within the volume by typing on the terminal the prompt below: <br/>
 
 ```
