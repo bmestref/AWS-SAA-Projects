@@ -65,3 +65,55 @@ Type whatever you want and save it by pressing Ctrl + O + Enter and Ctrl + X to 
 ls -la
 ```
 or see its full content typing ``` cat textfile.txt ```. So far we have set the folder as the mounted point of the file system within the volume attached to the instance, now reboot the instance by typing ```sudo reboot```.<br/>
+
+9 - After that, we will see the the file system has been rebooted as well since it was mounted manually. Fix that by manually mount it to the EBS volume. For that matter, we will first get the unique identifier of our EBS volumes by typing the prompt below in the terminal: <br/>
+
+```
+sudo blkid
+```
+Next, copy into the clipboard the ID of the EBS volume. A screenshoot is attached below: <br/>
+
+![image](ebs_ids.PNG)
+
+Once you've done that, let's configure the file which tells the instance what EBS volumes are mounted and where. For that matter, type into the terminal the prompt below: <br/>
+
+```
+sudo nano /etc/fstab
+```
+We will then access to the configuration file where it is told what file systems are mounted by our instance. We are going to add a new similar line. Add what's below: <br/>
+
+```
+UUIDS=<unique id we just copied into our clipboard previously> /ebstest xfs defaults,nofail
+```
+The line above tells the instance to mount the <...> EBS volume to the folder ebstest (created as well previously) within the xfs file system. Once entered all of that, press ```Ctrl+O``` to save that file and ```Ctrl+x``` to exit. <br/>
+
+10 - Finish up the mounting stage by mounting all volumes listed in the fstab file: <br/>
+
+```
+sudo mount -a
+```
+You can check now that the volume has been successfully mounted to the folder ebstest by typing ```df -k```. Actually, we can check the file ```textfile.txt``` is still persistent after the rebooting by typing ```ls -la```. <br/>
+
+11 - Once you've done that, we will no longer use this instance so exit the terminal, right click on the Instance 1 located within AZ A and stop it. Next, move to 'EBS volumes' on the menu on the left and once you're there right click on 'EBSTestVolume' and click on 'Dettach'. As you can see, EBS volumes live apart from instances, preserving the content stored within them. We will prove that by right click again on this EBS volume and select 'Attach volume' (we need to keep refreshing the volume until it has moved to the 'Available' state (it has been successfully detached from Instance 1 in AZ A)). This time, attach the instance to the Instance 2 running in AZ A. Save the changes. <br/>
+
+12 - Move back to the EC2 console and connect using Instance Connect to Instance 2 within AZ A. See that the instance has not interacted with the EBS volume yet, therefore it is not mounted. One can check that by typing on the terminal ```df -k``` and not finding the ebstest folder. We will mount the EBS volume to this instance by running the prompts below in the terminal: <br/>
+
+```
+sudo mkdir /ebstest # creates the ebstest folder
+sudo mount /dev/xvdf /ebstest # mounts the xvdf file system within the ebstest folder
+```
+Once you've done that, you can check by yourself that the textfile.txt persist within the volume since it lives past the instance lifecycle (completely separated from the instance) by running the prompts below: <br/>
+
+```
+cd /ebstest # move to the ebstest directory
+ls -la # retrieve a list of all files within the ebstest directory
+```
+
+13 - Remember that Volumes live only within a single AZ and therefore cannot be mounted to instances located within different AZs. However, one can solve it by creating a snapshoot of the volume, storing it on S3 and recovering it in the destination AZ (it allows us to move on volume from the source AZ to another). So right click on the volume in the EBS volumes console and next click on 'Create snapshoot'. Next, enter a description for the snapshoot and click on 'Create snapshoot'. You can check the snapshoot was successfully created by moving to the menu on the left and clicking on 'Snapshoots'. It may take some time to create it depending on the size of the content stores within the volume. Since the snapshoot is stored within S3, it means we can right click on it and click on 'Create volume from snapshoot'. We can change the volume type as well as the size and the AZ. For the last setting, change the AZ from us-east-1a to us-east-1b. On tags, enter a name so it can be easily identified and save the changes. <br/>
+
+14 - After that, move to 'EBS volumes' in the menu on the left and the recently created volume should be displayed. Right click on it, click on 'Attach volume' and in the instances dropdown all instances located within AZ B should be available. Select it, save changes and connect to the instance you picked before using Instance Connect. After that, follow the steps above regarding how to mount the volume. At the end, after moving to the ebstest folder and typing ```ls -la``` into the terminal the textfile.txt should be visible. <br/>
+
+15 - What's more, snapshoots can be forwarded to different AWS regions by right clicking on the snapshoot and next click on 'Copy snapshoot'. This will provide the capability of migrating snapshoots to external AWS regions in disaster scenarios. <br/>
+
+$\textcolor{'red'}{ATTENTION!}$ : the steps below fall apart from the free tier plan. <br/>
+
