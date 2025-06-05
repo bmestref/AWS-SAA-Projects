@@ -71,10 +71,7 @@ or see its full content typing ``` cat textfile.txt ```. So far we have set the 
 ```
 sudo blkid
 ```
-Next, copy into the clipboard the ID of the EBS volume. A screenshoot is attached below: <br/>
-
-![image](ebs_ids.PNG)
-
+Next, copy into the clipboard the ID of the EBS volume. <br/>
 Once you've done that, let's configure the file which tells the instance what EBS volumes are mounted and where. For that matter, type into the terminal the prompt below: <br/>
 
 ```
@@ -115,5 +112,12 @@ ls -la # retrieve a list of all files within the ebstest directory
 
 15 - What's more, snapshoots can be forwarded to different AWS regions by right clicking on the snapshoot and next click on 'Copy snapshoot'. This will provide the capability of migrating snapshoots to external AWS regions in disaster scenarios. <br/>
 
-$\textcolor{'red'}{ATTENTION!}$ : the steps below fall apart from the free tier plan. <br/>
+### **ATTENTION!**
+The steps below fall apart from the free tier plan. <br/>
+
+14 - In this part of the demo we will interact with Instances Store Volumes. It approximately has a cost of 13 cents per hour, so proceed with the steps below if you're willing to pay that amount, otherwise just take notes on how to do it. First, we will launch an instance manually by moving to the EC2 console and clicking on 'Launch and instance'. Enter a name for the instance, scroll down and pick the 'Amazon Linux 2023 AMI' as well as the '64-bit (x86)' options just below the first. Scroll down and in the instance type box we need to pick one which supports Instance Store Volumes. For this part of the project, we will be working with the 'm5dn.large' which supports the feature mentioned previously. Scroll down a little bit and in the 'Key pair' select 'Proceed without a key pair (Not recommended)' (even it is not recommended we will just go straightforwardly to test the instance store volume feature). Click on the 'Network settings', next click on the 'VPC' and pick the VPC we created before. Next, on the subnet dropdown select subnet 'sn-web-A'. Also, enable both 'Auto-assign public IP' and 'Auto-assign IPv6 IP' features. Scroll down, select a Security Group if you have one and in the 'Configure storage' we will leave it on default. What we can do though is to click on 'Show details' and see all the details of the instance store volume associated with this instance type (one instance store volume with a size of 75 GB  with its own device name). Go ahead and click on 'Launch instance'. Wait until the instance state was moved to completed. <br/>
+
+15 - Connect to the instance using Instance Connect. Here, we will be running the prompts listed in the earlier stages of the project. Its behaviour is similar to EBS volumes (if the instance is rebooted, the content stored within the instance store volume will not change at all) except in the scenario the instance is stopped. In that case, and after restarting it, the content of the instance store volume is permanently lost (any file system or file created earlier in the instance store volume). To summarize, Instance Store Volumes are ephemeral, they are not persistent and cannot rely on them to keep your data safe (it is critical to underline the key differences between restarting and stopping an instance: the first changes the host where the instance was located to while the latter do not. As a result, the public IPv4 of the instance changes at the restarting stage).
+
+16 - To end up with the project, tidy up and terminate all resources created throughout the project so we are not billed by services which fall apart from the free tier plan. <br/>
 
