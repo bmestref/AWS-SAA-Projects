@@ -1,4 +1,4 @@
-# Manual and Automatic Installation of Wordpress on AWS Instances
+# Manual Installation of Wordpress on AWS Instances
 
 As the title of the project states, we will install Wordpress to our instance manually. We will use EC2, install MariaDB, Apache and libraries and then download and install Wordpress. The architecture will be monolithic (everything installed within a single EC2 instance). That means both the application and the database will be located within the same instance. Also, it is worth to mention the instance will be located within a single subnet within a VPC which will be automatically created and deployed via CloudFormation.<br/>
 
