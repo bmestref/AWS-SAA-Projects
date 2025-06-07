@@ -100,7 +100,7 @@ sudo rm /tmp/db.setup
 
 11 - One can check the Wordpress application runs as expected by moving back to the EC2 console, copying into the clipboard the EC2 instance IPv4 public address and pasting it to the web browser on a new tab. This is the expected outcome: <br/>
 
-![expected_outcome](wordpress_final_pic.PNG)
+![expected_outcome](expected_outcome_pic.PNG)
 
 12 - As always, remove and delete all the resources created throughout the project so things do not start getting messy. <br/>
 
