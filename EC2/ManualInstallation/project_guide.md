@@ -102,7 +102,7 @@ sudo rm /tmp/db.setup
 
 ![expected_outcome](expected_outcome_pic.PNG)
 
-12 - As always, remove and delete all the resources created throughout the project so things do not start getting messy. <br/>
+12 - As always, remove and delete all the resources created throughout the project so things do not start getting messy. Proceed with this final step if you do not aim to step through [AMICreation](https://github.com/bmestref/AWS-SAA-Projects/EC2/ManualInstallation) project, which continues inmediately after the current repo. <br/>
 
 In the real world manual installations are legacy or avoided as much as possible. As an alternative, AWS provides the AMI service, an image of an instance which automates the creation and deployment of a series of resources from AWS. 
 
