@@ -1,6 +1,6 @@
 # Creating an EC2 Instance AMI
 
-In this project we will create an AMI from the customized source instance and use this to deploy a custom EC2 instance from this AMI. This project starts from the insfrastructure created in (ManualInstallation)[https://github.com/bmestref/AWS-SAA-Projects/EC2/ManualInstallation] repo. There, Wordpress was manually installed on a EC2 instance. <br/>
+In this project we will create an AMI from the customized source instance and use this to deploy a custom EC2 instance from this AMI. This project starts from the insfrastructure created in [ManualInstallation](https://github.com/bmestref/AWS-SAA-Projects/EC2/ManualInstallation) repo. There, Wordpress was manually installed on a EC2 instance. <br/>
 
 1 - In order to create an AMI from a running instance, first make sure the instance is shut down so no inconsistency issues are raised, so move to the EC2 console, go to 'Instances running', right click on the instance and then click on 'Stop instance'. Acknowledge the stop of the instance, and once it is done right click again on it, go down to 'Image and templates' and select 'Create image'. <br/>
 
