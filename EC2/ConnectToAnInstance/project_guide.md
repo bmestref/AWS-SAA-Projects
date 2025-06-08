@@ -44,6 +44,8 @@ Rerun the prompt displayed above earlier and access to the instance should be gr
 ```
 Try to change the 0.0.0.0/0 address to 18.205.107.24/29 in the Instance Connect route and you whould be able now to get access to the instance via Instance Connect. By doing this SSH Client connectivity will be cut since our local machine IPv4 address is no longer supported. Add both 18.205.107.24/29 and our local machine IPv4 address to support SSH Client and Instance Connect services following good practices. <br/>
 
+7 - Lastly we will cover a unique feature from EC2: Termination Protection. It adds an attribute to EC2 instances meaning they cannot be terminated while the flag is enabled. It provides protection against unintended termination and also allows role separation, where junior admins can be allowed to terminate but ONLY for instances with no protection attribute set. This feature can be enabled by right clicking on the EC2 instance, moving our cursor on top of 'Instance settings' and then on the pop up menu clicking on 'Change termination protection'. Once there, click on 'Enable' and click on 'Save'. Now, no matter how many times we attempt to terminate the instance, it will be running as normally. This recommended practice (mainly applied to critical instances) present a number of advantages: first, as stated earlier, prevents critical instances to be shut down, but it also adds another layer of permissions filter in order to terminate the instance (further permissions are required to disable the Termination Protection feature). Also, in the same pop up menu we can click on 'Change shutdown behaviour' and select either stop or terminate the instance when a shut down is performed.<br/>
+
 
 
 
