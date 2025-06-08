@@ -31,7 +31,8 @@ An error will raise, and that issue comes from the fact we have not allowed any 
 sudo usermod -a -G docker ec2-user
 ```
 <br/>
-This will enable to the ```ec2-user``` user within the ```docker``` group access to the engine (here, ```-G``` stands for group). That will allow any local user of the system (specifically, 'ec2-user') to be able to interact with the Docker engine. <br/>
+
+This will enable to the 'ec2-user' user within the 'docker' group access to the engine (here, '-G' stands for group). That will allow any local user of the system (specifically, 'ec2-user') to be able to interact with the Docker engine. <br/>
 
 7 - Next, we need to log out and log in back from the instance, so in therminal run: <br/>
 ```
