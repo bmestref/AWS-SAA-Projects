@@ -29,10 +29,10 @@ This will get the Metadata of the instance. The 169.254.169.254 is the Metadata 
 cd /var/log
 ls -la
 ```
-There are two log files which are relevant when tracking aby boostrapping problem: these files are cloud-init-output.log and cloud-init.log. Both of these are used for slightly different reasons: the first contains every command and its output run in the instance (database creation, permissions management, Wordpress installation files, etc.) (use it to determine the source of any error within the instance bootstrapping) while the second. The content of any of these files can be retrieved by typing the command below:<br/>
+There are two log files which are relevant when tracking aby boostrapping problem: these files are cloud-init-output.log and cloud-init.log. The role the first file plays is crucial: it contains every command and its output run in the instance (database creation, permissions management, Wordpress installation files, etc.) (use it to determine the source of any error within the instance bootstrapping). The content of any of these files can be retrieved by typing the command below:<br/>
 
 ```
 sudo cat <file_name>.log
 ```
 
-7 - 
+7 - Alternatively, we can provide the EC2 Instance user-data in advance in the CloudFormation template. Attached to this repo, you can find a second CloudFormation template which already includes user-data in the instance launch. Open it on any code editor: <br/>
