@@ -35,4 +35,20 @@ There are two log files which are relevant when tracking aby boostrapping proble
 sudo cat <file_name>.log
 ```
 
-7 - Alternatively, we can provide the EC2 Instance user-data in advance in the CloudFormation template. Attached to this repo, you can find a second CloudFormation template which already includes user-data in the instance launch. Open it on any code editor: <br/>
+7 - Alternatively, we can provide the EC2 Instance user-data in advance in the CloudFormation template. Attached to this repo, you can find a second CloudFormation template which already includes user-data in the instance launch. Open it on any code editor and scroll down until you come across the User-data block: <br/>
+```
+<...>
+UserData:
+  Fn::Base64: !Sub |
+  #!/bin/bash -xe
+  # STEP 2 - Install system software - including Web and DB
+  dnf install wget php-mysqlnd httpd php-fpm php-mysqli mariadb105-server php-json php php-devel cowsay -y
+  # STEP 3 - Web and DB Servers Online - and set to startup
+  systemctl enable httpd
+  systemctl enable mariadb
+<...>
+```
+These are exactly the same User-data prompts as used in the earlier steps, so it is expected to deploy the same resources as we did manually. <br/>
+
+8 - Finish up the project by terminating manually any instance deployed via CloudFormation as well as any additional resource. <br/>
+
