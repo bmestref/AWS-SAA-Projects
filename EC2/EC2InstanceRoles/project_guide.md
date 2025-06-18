@@ -14,4 +14,4 @@ In this project we will create an EC2 Instance Role, apply it to an EC2 instance
 6 - Check the role was attached sucessfully by connecting again via EC2 Instance Connect to the instance, and once the CLI shows up type ```aws s3 ls```. Now, as we have the instance role associated with this EC2 instance the command line tools use the temporary credentials created earlier. These credentials are provided actually via the Meta-data service. This can be checked by typing in the terminal ```curl http://169.254.169.254/latest/meta-data/iam/security_credentials/```. If at the end of the previous prompt add the name of the role, we will be able to see the explicit credentials of the role, as well as the expiration datetime when they will be no longer valid. These temporary credentials will be automatically renewed as long as services keep using the EC2 Instance. <br/>
 
 7 - One last thing to stress out, Configuration Settings do follow a specific order. It can be checked in the image below: <br/>
-[Image of Configuration Settings precedence](image.PNG)
+(image.PNG)[Image of Configuration Settings precedence]
