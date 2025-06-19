@@ -1,6 +1,6 @@
 # Parameter Store
 
-In this mini project we will create some Parameters in the Parameter Store and interact with them via the command line - using individual parameter operations and accessing via paths. <br/>
+In this mini project we will create some Parameters in the Parameter Store and interact with them via the command line using individual parameter operations and accessing via paths. <br/>
 
 1 - As always, make sure we are logged in the Management AWS account of your organization while working within the us-east-1 region. <br/>
 
