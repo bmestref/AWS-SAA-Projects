@@ -1,5 +1,5 @@
 
-Description:  A4L CFN-INIT Generic Web Simple Template 
+Description:  CFN-INIT Generic Web Simple Template 
   Requires A4L VPC Template to run
 Parameters:
   LatestAmiId:
