@@ -20,3 +20,9 @@ This mini-project steps through how to create Failover routing and private hoste
 
 9 - In this way, the primary record will be displayed until it fails (it can be simulated by stopping manually the instance). In that case, the secondary will be retrieved rerouting the traffic to the S3 static website. <br/>
 
+10 - Now, we will cover some key features about private hosted zones, so move back to the R53 console, on the menu on the left click on 'Hosted zones'. Next, click on 'Create hosted zone', enter a name (whatever you want), under 'Tags' make sure 'Private hosted zone' is selected and under 'VPCs to assocaite with the hosted zone' pick the VPC located in the us-east-1 region which was deployed via CloudFormation at the earier stages of the mini-project. With that been said, save changes. Now, let's create a record and associate it with the private hosted zone, so click on 'Create record' under 'Records' which will use the 'Simple routing' method, next click on 'Define simple record'. Now, as 'Record name' enter 'www' and make sure the 'Record type' is set to 'A-...'. Also, enter a sample IPv4 address to point the record to (1.1.1.1, for instance) as well as a TTL of 60 seconds. Finish the creation of the record by saving changes. <br/>
+
+11 - Notice that if we move back to the EC2 console, connect to the instance and attemp to ping from the terminal the record name we've just created AWS will yield an error. This error is raised wether by the fact the VPC entered in the record definition is not the VPC the instance lives on or we still need to wait some more minutes so the record is ready to be pinged. <br/>
+
+12 - As always, finish up the project by removing every source created throughout the steps above (records, S3 buckets, EC2 instances, CloudFormation stack, etc.) so we are not accidentally billed. <br/>
+
