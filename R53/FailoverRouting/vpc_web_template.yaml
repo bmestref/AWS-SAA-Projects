@@ -1,7 +1,7 @@
 
 Description:  CFN-INIT Generic Web Simple Template 
   Requires A4L VPC Template to run
-Parameters:
+Parameters: 
   LatestAmiId:
     Description: AMI for Instance (default is latest AmaLinux2)
     Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
