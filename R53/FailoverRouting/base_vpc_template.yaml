@@ -1,5 +1,5 @@
 
-Description:  Animals4Life base VPC Template
+Description:  Base VPC Template
 Resources:
   VPC:
     Type: AWS::EC2::VPC
