@@ -1,4 +1,4 @@
-# Split a Monoloth Architecture in APP and DB components
+# Split a Monolith Architecture in APP and DB components
 
 In this project we will migrate the database for the monolithic  Wordpress instance to a dedicated MariaDB platform running on EC2.
 
